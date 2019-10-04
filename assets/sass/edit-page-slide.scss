@@ -1,0 +1,22 @@
+// Custom meta box in Admin
+.custom-meta-box {
+	> * {		
+		display: block;
+	}
+	label {
+		margin-top: 1rem;
+	}
+	input {
+		margin-top: .5rem;
+		width: 100%;
+	}
+}
+
+// All slides list in Admin
+.post-type-slide .column-featured_image {
+	width: 100px;
+
+	img {
+		display: block;
+	}
+}
