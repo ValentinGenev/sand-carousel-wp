@@ -13,11 +13,4 @@ To create a carousel, one needs to create a post of the plugin's post type *Slid
 
 ## To do
 - Demo of the carousel;
-- usage tutorial;
-- review of the code;
-- change the fontello font with a svg;
-- minimize code;
-- make the carousel pause on blur (tab change, window change).
-
-## Known issues
-- The carousel doesn't stop when the user changes tabs or the window and the CSS animation causes visual inconsistencies when the user comes back to the page.
+- usage tutorial.
