@@ -30,7 +30,7 @@ class Sand_Carousel_WP_Shortcode {
         $autoplay               = (isset($atts['autoplay'])) ? $atts['autoplay'] : 1;
         $carousel_controls      = (isset($atts['arrows'])) ? $atts['arrows'] : 1;
         $carousel_id            = (isset($atts['id'])) ? $atts['id'] : uniqid('carousel_');
-        $carousel_class         = (isset($atts['class'])) ? ' ' . $atts['class'] : '';
+        $carousel_class         = (isset($atts['className'])) ? ' ' . $atts['className'] : '';
 
         // The markup
         $output                 = '';
