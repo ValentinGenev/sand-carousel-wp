@@ -9,8 +9,14 @@ The carousels created with this plugin can be placed everywhere with the use of 
 [sand_carousel group='slides-group-slug']
 ```
 
-To create a carousel, one needs to create a post of the plugin's post type *Slides* and then assign it to a *Slides Group*. The newly  created Slides Group slug should be placed in the shortcode.
+The slides of the carousel are stored in the custom post type **Slide**. The plugin also creates a custom taxonomy called **Slides Groups** to handle packaging the slides into carousels. 
 
-## To do
-- Demo of the carousel;
-- usage tutorial.
+## Shortcode options
+- `group` controls which group of slides should be shown in the carousel; if no group was specified, the carousel will show all slides.
+- `duration` sets the duration of the slides in ms. The default is `5000`.
+- `transition` sets the duration of the transition animation in ms. The default is `500`.
+- `resizable` controls whether or not the carousel should be resizable; if resizable is set to `1` the `autoplay` will be set to `0` automatically. The default is `0`.
+- `autoplay` controls whether or not the carousel should autoplay. The default is `1`.
+- `arrows` determines the controls of the carousel. The default is `1` for arrow controls; `0` is for dots.
+- `id` adds id to the carousel's containing element.
+- `class` adds class to the carousel's containing element.

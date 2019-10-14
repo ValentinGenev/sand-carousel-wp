@@ -7,13 +7,13 @@
 defined('WP_UNINSTALL_PLUGIN') or die('Hey! Get out!');
 
 $slides = get_posts(array(
-	'post_type'		=> 'slide',
-	'numberposts'	=> -1,
+    'post_type'     => 'slide',
+    'numberposts'   => -1,
 ));
 if (!empty($slides)) {
-	foreach ($slides as $slide) {
-		wp_delete_post($slide->ID, true);
-	}
+    foreach ($slides as $slide) {
+        wp_delete_post($slide->ID, true);
+    }
 }
 
 delete_custom_taxonomy('slides_group');

@@ -1,14 +1,15 @@
-window.addEventListener("load", () => {
-	const { slideDuration, transitionDuration, resizable, autoPlay, sliderControls } = sliderOptions;
+var sandCarousel = new SandCarousel(
+    sliderOptions.carouselId,
+    sliderOptions.carouselSlides,
+    sliderOptions.slideDuration,
+    sliderOptions.transitionDuration,
+    parseInt(sliderOptions.resizable),
+    parseInt(sliderOptions.autoPlay)
+);
 
-	const SAND_CAROUSEL = new SandCarousel('.sand-carousel', '.slide', slideDuration, transitionDuration, resizable, autoPlay);
-
-	// It's important to not use == operator because
-	// the variable is string ("0"/"1") rather than bool.
-	if (sliderControls == true) {
-		SAND_CAROUSEL.arrowControls();
-	}
-	else {
-		SAND_CAROUSEL.dotControls();
-	};
-});
+if (parseInt(sliderOptions.carouselControls) == true) {
+    sandCarousel.arrowControls();
+}
+else {
+    sandCarousel.dotControls();
+};
