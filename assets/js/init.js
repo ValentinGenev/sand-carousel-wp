@@ -1,24 +1,14 @@
 window.addEventListener("load", () => {
-	const { slideDuration, sliderControls } = sliderOptions;
-	const SLIDER			= document.querySelector(".sand-slider");
-	const SLIDES			= document.querySelectorAll(".slide");
+	const { slideDuration, transitionDuration, resizable, autoPlay, sliderControls } = sliderOptions;
 
-	// Sets the background color of the slides to the body background color:
-	SLIDER.style.backgroundColor = getComputedStyle(document.querySelector("body")).backgroundColor;
+	const SAND_CAROUSEL = new SandCarousel('.sand-carousel', '.slide', slideDuration, transitionDuration, resizable, autoPlay);
 
-	if (SLIDES.length > 1) {
-		const Sand_Carousel_WP = new SandSlider(SLIDER, SLIDES, slideDuration, 350);
-
-		// It's important to not use == operator because
-		// the variable is string ("0"/"1") rather than bool.
-		if (sliderControls == true) {
-			Sand_Carousel_WP.arrowControls();
-		}
-		else {
-			Sand_Carousel_WP.dotControls();
-		};
+	// It's important to not use == operator because
+	// the variable is string ("0"/"1") rather than bool.
+	if (sliderControls == true) {
+		SAND_CAROUSEL.arrowControls();
 	}
 	else {
-		SLIDES[0].style.opacity = 1;
-	}
+		SAND_CAROUSEL.dotControls();
+	};
 });

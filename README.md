@@ -1,4 +1,4 @@
-# sand-carousel-wp
+# Sand Carousel WP
 This plugin creates custom post type named Slide that's displayed in the [Sand Carousel](https://github.com/ValentinGenev/sand-carousel).
 **WARNING** the project is still in development.
 

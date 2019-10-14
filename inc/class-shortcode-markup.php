@@ -23,37 +23,44 @@ class Sand_Carousel_WP_Shortcode {
 	 ***********************************************************/	
 	public static function sand_carousel_wp_template($atts) {
 		// Slide options
-		$carousel_title		= (isset($atts['title'])) ? $atts['title'] : __('My Carousel', 'sand-slider');
-		$slide_duration		= (isset($atts['duration'])) ? $atts['duration'] : 5000;
-		$slider_controls	= (isset($atts['arrows'])) ? $atts['arrows'] : 0;
-		$slides_group		= (isset($atts['group'])) ? $atts['group'] : false;
-		$slider_id			= (isset($atts['id'])) ? 'id="' . $atts['id'] . '"' : '';
-		$slider_class		= (isset($atts['class'])) ? ' ' . $atts['class'] : '';
+		$carousel_title         = (isset($atts['title'])) ? $atts['title'] : __('My Carousel', 'sand-carousel-wp');
+		$slide_duration         = (isset($atts['duration'])) ? $atts['duration'] : 5000;
+		$transition_duration    = (isset($atts['transition'])) ? $atts['transition'] : 500;
+        $resizable_slider       = (isset($atts['resizable'])) ? $atts['resizable'] : false;
+        $autoplay               = (isset($atts['autoplay'])) ? $atts['autoplay'] : true;
+		$slider_controls        = (isset($atts['arrows'])) ? $atts['arrows'] : 0;
+		$slides_group           = (isset($atts['group'])) ? $atts['group'] : false;
+		$slider_id              = (isset($atts['id'])) ? 'id="' . $atts['id'] . '"' : '';
+		$slider_class           = (isset($atts['class'])) ? ' ' . $atts['class'] : '';
+
+        // Write a check if there are slides at all:
+        // - first check should be if there is a group
+        // - sedond if there are any slides in that group
 
 		// The markup
-		$output				= '';
+		$output                 = '';
 
-		$slides_args		= array(
-			'post_type'		=> 'slide',
-			'post_status'	=> 'publish',
-			'orderby'		=> 'date',
-			'order'			=> 'DESC',
-			'tax_query'		=> array(
-				($slides_group) ? array(
+		$slides_args            = array(
+			'post_type'         => 'slide',
+			'post_status'       => 'publish',
+			'orderby'           => 'date',
+			'order'             => 'DESC',
+			'tax_query'         => array(
+				($slides_group) ?  array(
 					'taxonomy'  => 'slides_group',
 					'field'     => 'term_id',
 					'terms'     => $slides_group,
 				) : null,
 			),
 		);
-		$slides_query		= new WP_Query($slides_args);
+		$slides_query           = new WP_Query($slides_args);
 
 		if ($slides_query->have_posts()) :
 			$output = '
-				<section class="sand-slider' . $slider_class . '"' . $slider_id . '>
+				<section class="sand-carousel' . $slider_class . '"' . $slider_id . '>
 					<h2 class="screen-reader-text">' . $carousel_title . '</h2>
 
-					<ul id="slides">';
+					<ul class="slides-wrapper">';
 
 			while ($slides_query->have_posts()) : $slides_query->the_post();
 				$post_ID		= get_the_ID();
@@ -66,7 +73,7 @@ class Sand_Carousel_WP_Shortcode {
 						<h3>' . get_the_title() . '</h3>
 						<div class="more-information">
 							' . $info . '
-							<span class="read-more">' . __('Learn more', 'sand-slider') . '</span>
+							<span class="read-more">' . __('Learn more', 'sand-carousel-wp') . '</span>
 						</div>
 						<figure>
 							' . get_the_post_thumbnail($post_ID, 'full') . '
@@ -83,10 +90,13 @@ class Sand_Carousel_WP_Shortcode {
 			';
 
 			if (!is_admin()) {
-				wp_enqueue_script('sand-slider-init', plugins_url('/assets/js/init.js' , __DIR__), array(), false, true);
-				wp_localize_script('sand-slider-init', 'sliderOptions', array(
-					'slideDuration'		=> $slide_duration,
-					'sliderControls'	=> $slider_controls,
+				wp_enqueue_script('sand-carousel-init', plugins_url('/assets/js/init.js' , __DIR__), array(), false, true);
+				wp_localize_script('sand-carousel-init', 'sliderOptions', array(
+					'slideDuration'		    => $slide_duration,
+                    'transitionDuration'    => $transition_duration,
+                    'resizable'             => $resizable_slider,
+                    'autoPlay'              => $autoplay,
+					'sliderControls'	    => $slider_controls,
 				));
 			}
 		endif;

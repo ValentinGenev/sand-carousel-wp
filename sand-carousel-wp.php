@@ -2,9 +2,7 @@
 /**
  * @package Sand_Carousel_WP
  * @version 1.0.0
- */
-
-/**
+ * 
  * Plugin Name:	Sand Carousel WP
  * Description:	This plugin creates custom post type named Slide that's displayed in the Sand Slider. <strong>WARNING</strong>: Uninstalling the plugin will delete it's entries.
  * Author:		Valentin Genev
@@ -65,8 +63,8 @@ if (!class_exists('Sand_Carousel_WP')) {
 		 * Enqueueing the AJAX scripts:
 		 ***********************************************************/
 		function add_sand_carousel_wp_styles_and_scripts() {
-			wp_enqueue_style('sand-slider',		plugins_url('/assets/css/vendor/sand-slider.css' , __FILE__), array(), false);
-			wp_enqueue_script('sand-slider',	plugins_url('/assets/js/vendor/sand-slider.js' , __FILE__), array(), false, true);
+			wp_enqueue_style('sand-carousel',		plugins_url('/assets/css/vendor/sand-carousel.css' , __FILE__), array(), false);
+			wp_enqueue_script('sand-carousel',	plugins_url('/assets/js/vendor/sand-carousel.js' , __FILE__), array(), false, true);
 		}
 		
 		/***********************************************************
@@ -74,14 +72,14 @@ if (!class_exists('Sand_Carousel_WP')) {
 		 ***********************************************************/
 		function add_custom_styles_to_the_editor() {
             // Load the theme styles within Gutenberg.
-            wp_enqueue_style('sand-slider-edit-page',	plugins_url('/assets/css/edit-page-slide.css' , __FILE__), false);
+            wp_enqueue_style('sand-carousel-edit-page',	plugins_url('/assets/css/edit-page-slide.css' , __FILE__), false);
         }
 
 		/***********************************************************
 		 * Registers the text domain for the plugin:
 		 ***********************************************************/
 		function sand_carousel_wp_load_textdomain() {
-			load_plugin_textdomain('sand-slider', FALSE, basename(dirname(__FILE__)) . '/languages/');
+			load_plugin_textdomain('sand-carousel-wp', FALSE, basename(dirname(__FILE__)) . '/languages/');
 		}
 	}
 
