@@ -86,8 +86,8 @@ class Sand_Carousel_WP_Shortcode {
 			';
 
 			if (!is_admin()) {
-                wp_enqueue_style('sand-carousel',	plugins_url('/assets/css/vendor/sand-carousel.css' , __DIR__), array(), false);
-                wp_enqueue_script('sand-carousel',	plugins_url('/assets/js/vendor/sand-carousel.js' , __DIR__), array(), false, true);
+                wp_enqueue_style('sand-carousel',	plugins_url('/assets/css/vendor/sand-carousel.min.css' , __DIR__), array(), false);
+                wp_enqueue_script('sand-carousel',	plugins_url('/assets/js/vendor/sand-carousel.min.js' , __DIR__), array(), false, true);
 				wp_enqueue_script('sand-carousel-init', plugins_url('/assets/js/init.js' , __DIR__), array('sand-carousel'), false, true);                
 				wp_localize_script('sand-carousel-init', 'sliderOptions', array(
 					'slideDuration'		    => $slide_duration,
