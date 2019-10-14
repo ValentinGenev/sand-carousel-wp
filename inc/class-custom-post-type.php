@@ -173,6 +173,7 @@ class Sand_Carousel_WP_Post_Type {
 			'cb'				=> '<input type="checkbox" />',
 			'featured_image'	=> 'Image',
 			'title'				=> 'Title',
+			'slides_group'		=> 'Group',
 			'date'				=> 'Date'
 		);
 
@@ -181,9 +182,20 @@ class Sand_Carousel_WP_Post_Type {
 
 	function slide_custom_columns_data($column, $post_id) {
 		switch ($column) {
-		case 'featured_image':
-			the_post_thumbnail(array(100, 100));
-			break;
+			case 'featured_image':
+				the_post_thumbnail(array(100, 100));
+				break;
+			case 'slides_group':
+				$slide_gropus = get_the_terms($post_id, 'slides_group');
+				if ($slide_gropus) {
+					foreach ($slide_gropus as $group) {
+						echo '<a href="./edit.php?slides_group=' . $group->slug . '&post_type=slide">' . $group->name . '</a>, ';
+					}
+				}
+				else {
+					echo '-';
+				}
+				break;
 		}
 	}
 }
