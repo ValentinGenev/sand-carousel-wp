@@ -5,8 +5,8 @@ This plugin creates custom post type named Slide that's displayed in the [Sand C
 ## About
 The carousels created with this plugin can be placed everywhere with the use of the plugin's shortcode:
 
-```html
-[sand_carousel group='slides-group-slug' duration=8000 transition=500 resizable=0 autoplay=1 arrows=1 id="my_carousel" class="my-carousel"]
+```php
+[sand_carousel group='slides-group-slug' duration=8000 transition=500 resizable=0 autoplay=1 arrows=1 id="my_carousel" className="my-carousel"]
 ```
 
 The slides of the carousel are stored in the custom post type **Slide**. The plugin also creates a custom taxonomy called **Slides Groups** to handle the packaging of the slides into carousels. 
@@ -19,4 +19,4 @@ The slides of the carousel are stored in the custom post type **Slide**. The plu
 - `autoplay` controls whether or not the carousel should autoplay. The default is `1`.
 - `arrows` determines the controls of the carousel. The default is `1` for arrow controls; `0` is for dots.
 - `id` adds id to the carousel's containing element.
-- `class` adds class to the carousel's containing element.
+- `className` adds class to the carousel's containing element.
