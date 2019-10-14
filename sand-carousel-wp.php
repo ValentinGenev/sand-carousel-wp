@@ -54,17 +54,6 @@ if (!class_exists('Sand_Carousel_WP')) {
 
 			// Adds the editor styles:
             add_action('admin_enqueue_scripts',	array($this, 'add_custom_styles_to_the_editor'));
-
-			// Add Sand Slider
-			add_action('wp_enqueue_scripts',	array($this, 'add_sand_carousel_wp_styles_and_scripts'));
-		}
-
-		/***********************************************************
-		 * Enqueueing the AJAX scripts:
-		 ***********************************************************/
-		function add_sand_carousel_wp_styles_and_scripts() {
-			wp_enqueue_style('sand-carousel',		plugins_url('/assets/css/vendor/sand-carousel.css' , __FILE__), array(), false);
-			wp_enqueue_script('sand-carousel',	plugins_url('/assets/js/vendor/sand-carousel.js' , __FILE__), array(), false, true);
 		}
 		
 		/***********************************************************
