@@ -1,14 +1,27 @@
 .custom-meta-box > * {
-  display: block; }
+	display: block;
+}
 .custom-meta-box label {
-  margin-top: 1rem; }
+	margin-top: 1rem;
+}
 .custom-meta-box input {
-  margin-top: .5rem;
-  width: 100%; }
+	margin-top: .5rem;
+	width: 100%;
+}
 
 .post-type-slide .column-featured_image {
-  width: 100px; }
-  .post-type-slide .column-featured_image img {
-    display: block; }
+	width: 100px;
+}
+.post-type-slide .column-featured_image img {
+	display: block;
+}
 
-/*# sourceMappingURL=edit-page-slide.css.map */
+.wp-picker-active .wp-picker-input-wrap {
+	display: flex;
+}
+.wp-picker-active .wp-picker-input-wrap label {
+	margin-top: 0;
+}
+.wp-picker-active .wp-picker-input-wrap input[type=button] {
+	width: initial;
+}

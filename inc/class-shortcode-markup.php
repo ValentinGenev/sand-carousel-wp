@@ -59,6 +59,7 @@ class Sand_Carousel_WP_Shortcode {
             while ($slides_query->have_posts()) : $slides_query->the_post();
                 $post_ID        	= get_the_ID();
                 $info           	= get_post_meta($post_ID, 'information', true) ? '<span class="info">' . get_post_meta($post_ID, 'information', true) . '</span>' : '';
+				$background_color	= get_post_meta($post_ID, 'background', true);
 				$thumbnail			= has_post_thumbnail($post_ID) ? '<figure>' . get_the_post_thumbnail($post_ID, $image_size) . '</figure>' : '';
                 $redirection    	= get_post_meta($post_ID, 'redirection', true) ? get_post_meta($post_ID, 'redirection', true) : false;
 				$rediretcion_open	= $redirection ? '<a href="' . $redirection . '">' : '';
@@ -66,7 +67,7 @@ class Sand_Carousel_WP_Shortcode {
 				$read_more_button	= $redirection ? '<span class="read-more">' . __('Learn more', 'sand-carousel-wp') . '</span>' : '';
 
                 $output .= '
-                    <li class="slide">
+                    <li class="slide"  style="background-color: ' . $background_color . ';">
 						' . $rediretcion_open . '
 							<h3>' . get_the_title() . '</h3>
 							<div class="more-information">

@@ -52,17 +52,35 @@ if (!class_exists('Sand_Carousel_WP')) {
             // Adds the text domain
             add_action('plugins_loaded',        array($this, 'sand_carousel_wp_load_textdomain'));
 
-            // Adds the editor styles:
-            add_action('admin_enqueue_scripts', array($this, 'add_custom_styles_to_the_editor'));
+			// Adds the WP color API:
+			add_action('admin_enqueue_scripts', array($this, 'sand_carousel_wp_color_picker_api'));
+
+            // Adds the editor script and stylesheet:
+            add_action('admin_enqueue_scripts', array($this, 'sand_carousel_custom_slide_edit_page'));
         }
         
         /***********************************************************
          * Enqueueing the edit page's custom styles:
          ***********************************************************/
-        function add_custom_styles_to_the_editor() {
-            // Load the theme styles within Gutenberg.
-            wp_enqueue_style('sand-carousel-edit-page', plugins_url('/assets/css/edit-page-slide.css' , __FILE__), false);
+        function sand_carousel_custom_slide_edit_page() {
+			global $post;
+
+			if ($post->post_type === 'slide') {
+				wp_enqueue_style('sand-carousel-edit-page',		plugins_url('/assets/css/edit-page-slide.css' , __FILE__), false);
+				wp_enqueue_script('sand-carousel-edit-page',	plugins_url('/assets/js/edit-page-slide.js', __FILE__), array('wp-color-picker'), false, true);
+			}
         }
+
+        /***********************************************************
+         * Enqueueing the edit page's custom styles:
+         ***********************************************************/
+		function sand_carousel_wp_color_picker_api() {
+			global $post;
+
+			if ($post->post_type === 'slide') {
+				wp_enqueue_style('wp-color-picker');
+			}
+		}
 
         /***********************************************************
          * Registers the text domain for the plugin:

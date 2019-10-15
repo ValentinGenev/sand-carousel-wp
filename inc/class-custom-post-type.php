@@ -15,16 +15,16 @@ class Sand_Carousel_WP_Post_Type {
      * Registers the post type and the taxonomy:
      ***********************************************************/
     public static function add_filters_and_actions() {
-        add_action('init',            array('Sand_Carousel_WP_Post_Type', 'slide_post_type'), 0);        
-        add_action('init',            array('Sand_Carousel_WP_Post_Type', 'slides_group_taxamony'), 10);
+        add_action('init',			array('Sand_Carousel_WP_Post_Type', 'slide_post_type'), 0);        
+        add_action('init',			array('Sand_Carousel_WP_Post_Type', 'slides_group_taxamony'), 10);
 
         // Custom meta boxes
-        add_action('admin_init',    array('Sand_Carousel_WP_Post_Type', 'slide_custom_fields'));
-        add_action('save_post',        array('Sand_Carousel_WP_Post_Type', 'save_custom_fields'));
+        add_action('admin_init',	array('Sand_Carousel_WP_Post_Type', 'slide_custom_fields'));
+        add_action('save_post',		array('Sand_Carousel_WP_Post_Type', 'save_custom_fields'));
 
         // Custom columns on admin slides list        
-        add_filter('manage_edit-slide_columns',        array('Sand_Carousel_WP_Post_Type', 'slide_custom_columns'));
-        add_action('manage_posts_custom_column',    array('Sand_Carousel_WP_Post_Type', 'slide_custom_columns_data'), 10, 2); 
+        add_filter('manage_edit-slide_columns',		array('Sand_Carousel_WP_Post_Type', 'slide_custom_columns'));
+        add_action('manage_posts_custom_column',	array('Sand_Carousel_WP_Post_Type', 'slide_custom_columns_data'), 10, 2); 
     }
 
     /***********************************************************
@@ -139,9 +139,10 @@ class Sand_Carousel_WP_Post_Type {
         global $post;
 
         // This displays the field data from the database
-        $custom            = get_post_custom($post->ID);
-        $information    = $custom["information"][0];
-        $redirection    = $custom["redirection"][0];
+        $custom			= get_post_custom($post->ID);
+        $information	= $custom['information'][0];
+        $redirection    = $custom['redirection'][0];
+		$background		= $custom['background'][0];
 
         echo '
             <fieldset class="custom-meta-box">
@@ -152,7 +153,13 @@ class Sand_Carousel_WP_Post_Type {
             <fieldset class="custom-meta-box">
                 <label for="slide_redirection">' . __('Redirection link', 'sand-carousel-wp') . '</label>
                 <input id="slide_redirection" name="redirection" type="url" value="' . $redirection . '">
-            </fieldset>';
+            </fieldset>
+
+            <fieldset class="custom-meta-box">
+                <label for="slide_background_color">' . __('Background color', 'sand-carousel-wp') . '</label>
+                <input class="my-color-field" id="slide_background_color" name="background" type="text" data-default-color="#fff" value="' . $background . '">
+            </fieldset>
+		';
     }
 
     // Saving the data from all the custom fields:
@@ -162,6 +169,7 @@ class Sand_Carousel_WP_Post_Type {
         // Event ifnormation fields
         update_post_meta($post->ID, "information", $_POST["information"]);
         update_post_meta($post->ID, "redirection", $_POST["redirection"]);
+        update_post_meta($post->ID, "background", $_POST["background"]);
     }
 
 
