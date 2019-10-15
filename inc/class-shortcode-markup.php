@@ -29,6 +29,7 @@ class Sand_Carousel_WP_Shortcode {
         $resizable_carousel     = (isset($atts['resizable'])) ? $atts['resizable'] : 0;
         $autoplay               = (isset($atts['autoplay'])) ? $atts['autoplay'] : 1;
         $carousel_controls      = (isset($atts['arrows'])) ? $atts['arrows'] : 1;
+		$image_size				= (isset($atts['image_size'])) ? $atts['image_size'] : 'full';
         $carousel_id            = (isset($atts['id'])) ? $atts['id'] : uniqid('carousel_');
         $carousel_class         = (isset($atts['className'])) ? ' ' . $atts['className'] : '';
 
@@ -56,23 +57,26 @@ class Sand_Carousel_WP_Shortcode {
                     <ul class="slides-wrapper">';
 
             while ($slides_query->have_posts()) : $slides_query->the_post();
-                $post_ID        = get_the_ID();
-                $info           = (get_post_meta($post_ID, 'information', true)) ? '<span class="info">' . get_post_meta($post_ID, 'information', true) . '</span>' : '';
-                $redirection    = (get_post_meta($post_ID, 'redirection', true)) ? get_post_meta($post_ID, 'redirection', true) : false;
+                $post_ID        	= get_the_ID();
+                $info           	= get_post_meta($post_ID, 'information', true) ? '<span class="info">' . get_post_meta($post_ID, 'information', true) . '</span>' : '';
+				$thumbnail			= has_post_thumbnail($post_ID) ? '<figure>' . get_the_post_thumbnail($post_ID, $image_size) . '</figure>' : '';
+                $redirection    	= get_post_meta($post_ID, 'redirection', true) ? get_post_meta($post_ID, 'redirection', true) : false;
+				$rediretcion_open	= $redirection ? '<a href="' . $redirection . '">' : '';
+				$redirection_close	= $redirection ? '</a>' : '';
+				$read_more_button	= $redirection ? '<span class="read-more">' . __('Learn more', 'sand-carousel-wp') . '</span>' : '';
 
-                $output .= ($redirection) ? '<a href="' . $redirection . '">' : '';
                 $output .= '
                     <li class="slide">
-                        <h3>' . get_the_title() . '</h3>
-                        <div class="more-information">
-                            ' . $info . '
-                            <span class="read-more">' . __('Learn more', 'sand-carousel-wp') . '</span>
-                        </div>
-                        <figure>
-                            ' . get_the_post_thumbnail($post_ID, 'full') . '
-                        </figure>
-                    </li>';
-                $output .= ($redirection) ? '</a>' : '';
+						' . $rediretcion_open . '
+							<h3>' . get_the_title() . '</h3>
+							<div class="more-information">
+								' . $info . '
+								' . $read_more_button . '
+							</div>
+							' . $thumbnail . '
+						' . $redirection_close . '
+                    </li>
+				';
 
             endwhile;
             wp_reset_query();
@@ -87,6 +91,7 @@ class Sand_Carousel_WP_Shortcode {
                     wp_enqueue_style('sand-carousel',   plugins_url('/assets/css/vendor/sand-carousel.min.css' , __DIR__), array(), false);
                     wp_enqueue_script('sand-carousel',  plugins_url('/assets/js/vendor/sand-carousel.min.js' , __DIR__), array(), false);
                 }
+
                 wp_enqueue_script('sand-carousel-init'. $carousel_id, plugins_url('/assets/js/init.js' , __DIR__), array('sand-carousel'), false);                
                 wp_localize_script('sand-carousel-init'. $carousel_id, 'sliderOptions', array(
                     'carouselId'            => '#' . $carousel_id,

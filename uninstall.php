@@ -26,7 +26,7 @@ function delete_custom_taxonomy($taxonomy){
     global $wpdb;
  
     // SQL magic — gets the terms based on taxomony instead of get_terms()
-    $terms_query =      "SELECT t.name, t.term_id 
+    $terms_query =     "SELECT t.name, t.term_id 
                         FROM " . $wpdb->terms . " AS t
                         INNER JOIN " . $wpdb->term_taxonomy . " AS tt
                         ON t.term_id = tt.term_id
